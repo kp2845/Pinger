@@ -134,8 +134,8 @@ def ping(host, timeout=1):
 
     packet_min = min(timeRTT)
     packet_max = max(timeRTT)
-    packet_avg = ((sum(timeRTT)) / 4) * 1000
-    stdev_var = (timeRTT) * 1000
+    packet_avg = ((sum(timeRTT)) / 4)
+    stdev_var = (timeRTT)
     vars = [str(packet_min), str(packet_avg), str(packet_max),str(stdev(stdev_var))]
     print(vars)
     return vars
