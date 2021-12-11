@@ -100,7 +100,6 @@ def sendOnePing(mySocket, destAddr, ID):
 def doOnePing(destAddr, timeout):
     icmp = getprotobyname("icmp")
 
-
     # SOCK_RAW is a powerful socket type. For more details:   http://sockraw.org/papers/sock_raw
     mySocket = socket(AF_INET, SOCK_RAW, icmp)
 
@@ -114,8 +113,8 @@ def doOnePing(destAddr, timeout):
 def ping(host, timeout=1):
     # timeout=1 means: If one second goes by without a reply from the server,  	# the client assumes that either the client's ping or the server's pong is lost
     dest = gethostbyname(host)
-    print("Pinging " + dest + " using Python:")
-    print("")
+    #print("Pinging " + dest + " using Python:")
+    #print("")
     # Calculate vars values and return them
     #  vars = [str(round(packet_min, 2)), str(round(packet_avg, 2)), str(round(packet_max, 2)),str(round(stdev(stdev_var), 2))]
 
@@ -124,19 +123,24 @@ def ping(host, timeout=1):
     timeRTT = []
     for i in range(0,4):
         delay = doOnePing(dest, timeout)
-        print("Reply from: " + dest + " Time: " + str(round(delay, 2) *1000) + "ms")
+        #print(delay)
+        #print("Reply from " + dest + ": bytes=" + " time=" + str(round(delay, 2) *1000) + "ms" + " TTL=")
         #print(delay)
         time.sleep(1)  # one second
         timeRTT.append(delay)
-    print("")
-    print("---- google.co.il ping statistics ----")
+        #print(delay)
+    #print("")
+    #print("---- google.co.il ping statistics ----")
 
     packet_min = min(timeRTT)
     packet_max = max(timeRTT)
     packet_avg = ((sum(timeRTT)) / 4) * 1000
     stdev_var = (timeRTT) * 1000
     vars = [str(round(packet_min, 2)), str(round(packet_avg, 2)), str(round(packet_max, 2)),str(round(stdev(stdev_var), 2))]
+    print(vars)
     return vars
+
+
 
 if __name__ == '__main__':
     ping("google.co.il")
